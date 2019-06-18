@@ -63,6 +63,7 @@ namespace Utility
         /// </summary>
         /// <param name="form"></param>
         /// <returns></returns>
+        /// <alert>broken</alert>
         public static bool TextBoxesAreEmpty(Form form)
         {
             foreach (Control c in form.Controls)

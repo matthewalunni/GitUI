@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Utility;
+using Octokit;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Utility;
+using System.Diagnostics;
 
 namespace GitUI
 {
@@ -23,14 +27,33 @@ namespace GitUI
         }
 
 
-        private void BtnCreate_Click(object sender, EventArgs e)
+        private void BtnCreate_ClickAsync(object sender, EventArgs e)
         {
-            CreateFolder();
+            try
+            {
+                CreateFolder();
+                CreateProjectCommands();
 
-            //create a folder in the directory
-            //initialize source control --git init
-            //go to GitHub and create a new repository
+                string url = CreateOnlineRepository();
+                TbOutput.Text += "URL: " + url + Environment.NewLine;
+                TbOutput.Text += "Origin: " + url + ".git" + Environment.NewLine;
 
+                var results = Git.PushExistingRepository(url + ".git");
+
+                foreach (var output in results)
+                {
+                    TbOutput.Text += output + Environment.NewLine;
+                }
+                MessageBox.Show("The repository " + TbProjectName.Text + " has been created at directory " + createdDirectory + ". The application" +
+                    "will now close.");
+                System.Windows.Forms.Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An unusual exception has occured.  Please try again.  Error: " + ex.ToString());
+            }
+
+            
         }
 
 
@@ -40,6 +63,15 @@ namespace GitUI
             lf.ShowDialog();
         }
 
+        private string CreateOnlineRepository()
+        {
+            var client = new GitHubClient(new ProductHeaderValue(TbProjectName.Text));
+            string username = Properties.Settings.Default.Username;
+            string password = Properties.Settings.Default.Password;
+            client.Credentials = Git.Authenticate(username, password);
+            var repo = Git.CreateRepository(TbProjectName.Text, client);
+            return repo.Url;
+        }
 
         private void CreateFolder()
         {
@@ -57,12 +89,30 @@ namespace GitUI
             }
         }
 
+        private void CreateProjectCommands()
+        {
+            LinkedList<string> commands = new LinkedList<string>();
+            commands.AddLast("cd C:/");
+            commands.AddLast("cd " + createdDirectory + ";");
+            commands.AddLast("git init;");
+            commands.AddLast("git add README.md;");
+            commands.AddLast("git commit -m \"initial commit\";");
+            commands.AddLast("git push -u origin master");
+
+            foreach (var command in commands)
+            {
+
+                string output = CommandPrompt.Execute(command);
+                TbOutput.Text += output + Environment.NewLine;
+            }
+        }
+
         private void SetUpForm()
         {
-            CbApplication.Items.Add("Visual Studio 2019");
-            CbApplication.Items.Add("VSCode");
-            CbApplication.Items.Add("IntelliJ IDEA");
-            CbApplication.Items.Add("PyCharm");
+        //    CbApplication.Items.Add("Visual Studio 2019");
+        //    CbApplication.Items.Add("VSCode");
+        //    CbApplication.Items.Add("IntelliJ IDEA");
+        //    CbApplication.Items.Add("PyCharm");
         }
 
     }

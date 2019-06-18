@@ -22,16 +22,12 @@ namespace GitUI
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            if (BasicForm.TextBoxesAreEmpty(this))
-            {
-                MessageBox.Show("Make sure the username and password fields are filled!");
-                return;
-            }
-            else
-            {
-                username = TbUsername.Text;
-                password = TbPassword.Text;
-            }
+            username = TbUsername.Text;
+            password = TbPassword.Text;
+            Properties.Settings.Default.Username = username;
+            Properties.Settings.Default.Password = password;
+            Properties.Settings.Default.Save();
+            Close();
         }
     }
 }

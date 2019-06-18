@@ -33,14 +33,12 @@
             this.BtnCreate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.TbProjectName = new System.Windows.Forms.TextBox();
-            this.CbApplication = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeLoginCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label4 = new System.Windows.Forms.Label();
             this.TbOutput = new System.Windows.Forms.TextBox();
-            this.changeLoginCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,13 +66,13 @@
             // BtnCreate
             // 
             this.BtnCreate.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnCreate.Location = new System.Drawing.Point(206, 509);
+            this.BtnCreate.Location = new System.Drawing.Point(212, 437);
             this.BtnCreate.Name = "BtnCreate";
             this.BtnCreate.Size = new System.Drawing.Size(75, 23);
             this.BtnCreate.TabIndex = 2;
             this.BtnCreate.Text = "Create";
             this.BtnCreate.UseVisualStyleBackColor = true;
-            this.BtnCreate.Click += new System.EventHandler(this.BtnCreate_Click);
+            this.BtnCreate.Click += new System.EventHandler(this.BtnCreate_ClickAsync);
             // 
             // label1
             // 
@@ -93,26 +91,6 @@
             this.TbProjectName.Name = "TbProjectName";
             this.TbProjectName.Size = new System.Drawing.Size(469, 22);
             this.TbProjectName.TabIndex = 4;
-            // 
-            // CbApplication
-            // 
-            this.CbApplication.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CbApplication.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbApplication.FormattingEnabled = true;
-            this.CbApplication.Location = new System.Drawing.Point(12, 191);
-            this.CbApplication.Name = "CbApplication";
-            this.CbApplication.Size = new System.Drawing.Size(469, 24);
-            this.CbApplication.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 171);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 17);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Application:";
             // 
             // label3
             // 
@@ -142,10 +120,17 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // changeLoginCredentialsToolStripMenuItem
+            // 
+            this.changeLoginCredentialsToolStripMenuItem.Name = "changeLoginCredentialsToolStripMenuItem";
+            this.changeLoginCredentialsToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.changeLoginCredentialsToolStripMenuItem.Text = "Change Login Credentials";
+            this.changeLoginCredentialsToolStripMenuItem.Click += new System.EventHandler(this.ChangeLoginCredentialsToolStripMenuItem_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 239);
+            this.label4.Location = new System.Drawing.Point(15, 166);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 17);
             this.label4.TabIndex = 9;
@@ -155,30 +140,22 @@
             // 
             this.TbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbOutput.Location = new System.Drawing.Point(12, 259);
+            this.TbOutput.Location = new System.Drawing.Point(12, 186);
             this.TbOutput.Multiline = true;
             this.TbOutput.Name = "TbOutput";
             this.TbOutput.ReadOnly = true;
+            this.TbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TbOutput.Size = new System.Drawing.Size(469, 239);
             this.TbOutput.TabIndex = 10;
-            // 
-            // changeLoginCredentialsToolStripMenuItem
-            // 
-            this.changeLoginCredentialsToolStripMenuItem.Name = "changeLoginCredentialsToolStripMenuItem";
-            this.changeLoginCredentialsToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
-            this.changeLoginCredentialsToolStripMenuItem.Text = "Change Login Credentials";
-            this.changeLoginCredentialsToolStripMenuItem.Click += new System.EventHandler(this.ChangeLoginCredentialsToolStripMenuItem_Click);
             // 
             // CreateProjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 542);
+            this.ClientSize = new System.Drawing.Size(494, 472);
             this.Controls.Add(this.TbOutput);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.CbApplication);
             this.Controls.Add(this.TbProjectName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnCreate);
@@ -202,8 +179,6 @@
         private System.Windows.Forms.Button BtnCreate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TbProjectName;
-        private System.Windows.Forms.ComboBox CbApplication;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
