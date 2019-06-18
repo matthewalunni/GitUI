@@ -3,9 +3,7 @@ using Octokit;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace GitUI
 {
@@ -44,8 +42,9 @@ namespace GitUI
                 {
                     TbOutput.Text += output + Environment.NewLine;
                 }
-                MessageBox.Show("The repository " + TbProjectName.Text + " has been created at directory " + createdDirectory + ". The application" +
-                    "will now close.");
+                MessageBox.Show("The repository " + TbProjectName.Text + " has been created at directory "
+                    + createdDirectory + ". The application" + "will now close.");
+
                 System.Windows.Forms.Application.Exit();
             }
             catch (Exception ex)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateProjectForm));
             this.TbDirectory = new System.Windows.Forms.TextBox();
             this.BtnDirectory = new System.Windows.Forms.Button();
             this.BtnCreate = new System.Windows.Forms.Button();
@@ -162,6 +163,7 @@
             this.Controls.Add(this.BtnDirectory);
             this.Controls.Add(this.TbDirectory);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "CreateProjectForm";
             this.Text = "Create a New Git Project";
